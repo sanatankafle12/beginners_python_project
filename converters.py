@@ -1,32 +1,32 @@
 from tkinter import *
 from tkinter import ttk
 
-window  = Tk()
-window.geometry('100x100')
+window = Tk()
+window.geometry('200x200')
 window.title('Converters..')
 
-def calculate(*args):
-    s = 0
-    n = 0
-    num = binary.get()
-    length = len(num)
-    for i in num:
-        if i == '0' or i == '1':
-            num = int(num)
-            while num!=0:
-                v = num%10
-                to_add = v*pow(2,n)
-                n+=1
-                s+=to_add
-                num = int(num/10)
-        else:
-            decimal.set('Invalid..')   
-            break
-    if n == length:
-        decimal.set(s)
-        
-def binary_tkinter():
+def binary_to_decimal():
     window.destroy()
+    def calculate(*args):
+        s = 0
+        n = 0
+        num = binary.get()
+        length = len(num)
+        for i in num:
+            if i == '0' or i == '1':
+                num = int(num)
+                while num!=0:
+                    v = num%10
+                    to_add = v*pow(2,n)
+                    n+=1
+                    s+=to_add
+                    num = int(num/10)
+            else:
+                decimal.set('Invalid..')   
+                break
+        if n == length:
+            decimal.set(s)
+
     root = Tk()
     root.title("Binary To Decimal")
 
@@ -57,8 +57,7 @@ def binary_tkinter():
     binary_entry.focus()
     root.mainloop()
 
-
-my_button = Button(text="Binary_to_decimal", command=binary_tkinter)
+my_button = Button(text = 'Binary to decimal',command=binary_to_decimal)
 my_button.pack()
 
 window.mainloop()
