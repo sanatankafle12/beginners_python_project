@@ -1,3 +1,11 @@
+'''
+This program contains the following things:
+-> Binary to Decimal converter
+-> Decimal to Binary converter
+-> Binary addition
+-> Binary substraction
+'''
+
 from tkinter import *
 from tkinter import ttk
 
@@ -166,7 +174,6 @@ def binary_adder():
 
 
     total = StringVar()
-
     ttk.Label(mainframe, textvariable=total).grid(column=2, row=3, sticky=(W, E))
 
     ttk.Button(mainframe, text="Calculate", command=calculate).grid(column=3, row=4, sticky=W)
