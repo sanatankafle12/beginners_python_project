@@ -10,7 +10,7 @@ from tkinter import *
 from tkinter import ttk
 
 window = Tk()
-window.geometry('500x500')
+window.geometry('300x250')
 window.title('Converters..')
 
 #Change binary to decimal
