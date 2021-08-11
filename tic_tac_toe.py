@@ -17,6 +17,7 @@ def check_win():
         return 1
 
 
+
 def check_valid(number):
 
     if number not in [0,1,2,3,4,5,6,7,8]:
@@ -84,6 +85,6 @@ def main():
             draw_board()
             break
         draw_board()
-
-
+    if n == 10:
+        print("Draw")
 main()
