@@ -26,6 +26,14 @@ Check for the win:
 -> the third loop checks download diagonal
 -> the forth loop checks upward diagonal
 '''
+def check_draw():
+    for i in range(6):
+        for j in range(7):
+            if(board[i][j] == 'X' and board[i][j]=='O'):
+                return False
+    return True
+
+
 def check_win():
     for i in range(6):
         for j in range(4):
@@ -69,8 +77,8 @@ if __name__ == "__main__":
     display()
     n=1
     vs = input("Press 1 to play one on one and press2 to play with computer. ")
-    
-    while(checkwin==False):
+    draw = False
+    while(checkwin==False or draw==False):
         if(int(vs)==1):
             if(n%2==0):
                 player = 'X'
@@ -80,7 +88,11 @@ if __name__ == "__main__":
             x = int(x)
             y = int(y)
             if valid(x,y,player) == True:
-                checkwin = check_win() 
+                board[x][y] = player
+                if(x!=0):
+                    board[x-1][y] = '-'
+                checkwin = check_win()
+                draw =check_draw() 
                 n+=1      
             else:  
                 print("Invalid Input.. Please input valid coordinate.")
@@ -100,6 +112,7 @@ if __name__ == "__main__":
                 if(x!=0):
                     board[x-1][y] = '-'
                 checkwin = check_win() 
+                draw = check_draw()
                 n+=1      
             else:  
                 print("Invalid Input.. Please input valid coordinate.")
