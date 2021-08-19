@@ -1,3 +1,4 @@
+#declaring the board
 board = [
         [' ',' ',' ',' ',' ',' ',' '],
         [' ',' ',' ',' ',' ',' ',' '],
@@ -7,7 +8,7 @@ board = [
         ['-','-','-','-','-','-','-']
         ]
         
-
+#showing board with proper formating
 def display():
     print("   0 1 2 3 4 5 6 ")
     print("0 |"+board[0][0]+"|"+board[0][1]+"|"+board[0][2]+"|"+board[0][3]+"|"+board[0][4]+"|"+board[0][5]+"|"+board[0][6]+"|")
@@ -17,7 +18,13 @@ def display():
     print("4 |"+board[4][0]+"|"+board[4][1]+"|"+board[4][2]+"|"+board[4][3]+"|"+board[4][4]+"|"+board[4][5]+"|"+board[4][6]+"|")
     print("5 |"+board[5][0]+"|"+board[5][1]+"|"+board[5][2]+"|"+board[5][3]+"|"+board[5][4]+"|"+board[5][5]+"|"+board[5][6]+"|")
 
-
+'''
+Check for the win:
+-> the first loop checks horizontal win
+-> the second loop checks vertical win
+-> the third loop checks download diagonal
+-> the forth loop checks upward diagonal
+'''
 def check_win():
     for i in range(6):
         for j in range(4):
@@ -34,9 +41,14 @@ def check_win():
             if board[i][j] == board[i+1][j+1] == board[i+2][j+2] == board[i+3][j+3]and board[i][j] in ['X','O']:
                 print(f"{board[i][j]} wins.")
                 return True
+    for i in range(3,6):
+        for j in range(4):
+            if board[i][j] == board[i-1][j+1] == board[i-2][j+2] == board[i-3][j+3]and board[i][j] in ['X','O']:
+                print(f"{board[i][j]} wins.")
+                return True
     return False
 
-
+#this checks for valid position and sets X or O if position is valid
 def valid(x,y,player):
     if board[x][y] == '-':
         board[x][y] = player
