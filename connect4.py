@@ -1,3 +1,4 @@
+import random
 #declaring the board
 board = [
         [' ',' ',' ',' ',' ',' ',' '],
@@ -48,12 +49,17 @@ def check_win():
                 return True
     return False
 
+#for computer's move
+def computer_move():
+    while(True):
+        choice1 = random.choice([0,1,2,3,4,5])
+        choice2 = random.choice([0,1,2,3,4,5,6])
+        if(valid(choice1,choice2,'O')):
+            return(choice1,choice2)
+
 #this checks for valid position and sets X or O if position is valid
 def valid(x,y,player):
     if board[x][y] == '-':
-        board[x][y] = player
-        if(x!=0):
-            board[x-1][y] = '-'
         return True
     else:
         return False
@@ -62,19 +68,43 @@ if __name__ == "__main__":
     checkwin = False
     display()
     n=1
+    vs = input("Press 1 to play one on one and press2 to play with computer. ")
+    
     while(checkwin==False):
+        if(int(vs)==1):
+            if(n%2==0):
+                player = 'X'
+            else:
+                player = 'O'
+            x,y = input(f"{player}'s turn. Use column and row simultaniusly to place {player}: ").split()
+            x = int(x)
+            y = int(y)
+            if valid(x,y,player) == True:
+                checkwin = check_win() 
+                n+=1      
+            else:  
+                print("Invalid Input.. Please input valid coordinate.")
+            display()
 
-        if(n%2==0):
-            player = 'X'
+        elif(int(vs)==2):
+            if(n%2==0):
+                player = 'X'
+                x,y = input(f"{player}'s turn. Use column and row simultaniusly to place {player}: ").split()
+                x = int(x)
+                y = int(y)
+            else:
+                player = 'O'
+                (x,y) = computer_move()
+            if valid(x,y,player) == True:
+                board[x][y] = player
+                if(x!=0):
+                    board[x-1][y] = '-'
+                checkwin = check_win() 
+                n+=1      
+            else:  
+                print("Invalid Input.. Please input valid coordinate.")
+            display()
         else:
-            player = 'O'
+            print("Invalid Option.")
+            vs = input("Press 1 to play one on one and press2 to play with computer. ")
             
-        x,y = input(f"{player}'s turn. Use column and row simultaniusly to place {player}: ").split()
-        x = int(x)
-        y = int(y)
-        if valid(x,y,player) == True:
-            checkwin = check_win() 
-            n+=1      
-        else:  
-            print("Invalid Input.. Please input valid coordinate.")
-        display()
